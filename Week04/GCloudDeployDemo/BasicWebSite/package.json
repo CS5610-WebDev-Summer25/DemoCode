@@ -1,9 +1,0 @@
-{
-    "name": "basicwebsite",
-    "scripts": {
-        "start": "http-server"
-    },
-    "dependencies": {
-        "http-server": "*"
-    }
-}
