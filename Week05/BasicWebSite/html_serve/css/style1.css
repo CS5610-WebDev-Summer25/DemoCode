@@ -1,0 +1,48 @@
+.my_container_div {
+    background-color: papayawhip;
+    border: 3px gray solid;
+    border-radius: 25px;
+    margin: 10px;
+    padding: 20px;
+}
+
+p.fancy {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2em;
+    text-align: center;
+}
+
+.flex_container_div {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: -moz-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.my_left_div {
+    background-color: red !important;
+}
+
+div.my_center_div {
+    background-color: #0099ff;
+}
+
+div.my_right_div {
+    background-color: rgba(0, 240, 50, 1.0)
+}
+
+.my_div {
+    background-color: purple;
+    padding: 5px;
+    width: 250px;
+    height: 80px;
+    margin: 10px;
+    line-height: 80px;
+    color: white;
+    text-align: center;
+}
