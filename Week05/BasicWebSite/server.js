@@ -14,16 +14,16 @@ const dbName = 'demo_db'
 // Declare variables
 let db, collection;
 
-// Use the MongoClient module to create a db connection
-MongoClient.connect(dbURL, function(err, client){
-    if (err) {
-        console.log('Failed to connect to db server:', err);
-    } else {
-        console.log('Connected successfully to db server');
-        db = client.db(dbName);
-        collection = db.collection('doohickeys');
-    }
-});
+const client = new MongoClient(dbURL);
+
+async function connectClient() {
+    await client.connect();
+    console.log('Connected successfully to db server');
+    db = client.db(dbName);
+    collection = db.collection('doohickeys');
+}
+
+connectClient();
 
 const server = http.createServer(onRequest);
 
@@ -31,24 +31,15 @@ server.listen(PORT);
 console.log(`Server listening on port ${PORT}`);
 
 
-function onRequest(req, resp) {
+async function onRequest(req, resp) {
     console.log(`Received request for ${req.url}`);
     let respType = 'html';
 
     if ('/api_rest/doohickeys' === req.url) {
-        collection.find({}).toArray(function(err, docs) {
-            if (err) {
-                // Send an HTTP 500 status code response
-                resp.writeHead(500);
-                resp.end(err);
-            } else {
-                // Return the data
-                resp.writeHead(200, {'Content-type': 'application/json'});
-                resp.end(JSON.stringify(docs));
-            }
-        });
+        const docs = await collection.find({}).toArray();
+        resp.writeHead(200, {'Content-type': 'application/json'});
+        resp.end(JSON.stringify(docs));
     } else
-
 
     if ('/' === req.url) {
         fs.readFile(`${HTML_DIR}/index.html`,

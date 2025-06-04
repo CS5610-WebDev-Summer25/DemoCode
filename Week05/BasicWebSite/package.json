@@ -1,6 +1,6 @@
 {
     "name": "basicwebsite",
     "dependencies": {
-        "mongodb": "4.10.0"
+        "mongodb": "^6.17.0"
     }
 }
