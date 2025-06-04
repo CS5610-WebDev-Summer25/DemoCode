@@ -16,6 +16,10 @@ let db, collection;
 
 const client = new MongoClient(dbURL);
 
+// This is updated code using async/await syntax
+// which enables us to use the newer MongoDB driver
+// Many JS dependencies are moving away from the callback
+// paradigmn (will discuss in class)
 async function connectClient() {
     await client.connect();
     console.log('Connected successfully to db server');
@@ -35,6 +39,7 @@ async function onRequest(req, resp) {
     console.log(`Received request for ${req.url}`);
     let respType = 'html';
 
+    // Async/await syntax update. See above
     if ('/api_rest/doohickeys' === req.url) {
         const docs = await collection.find({}).toArray();
         resp.writeHead(200, {'Content-type': 'application/json'});
