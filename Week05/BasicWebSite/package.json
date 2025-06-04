@@ -1,0 +1,6 @@
+{
+    "name": "basicwebsite",
+    "dependencies": {
+        "mongodb": "4.10.0"
+    }
+}
