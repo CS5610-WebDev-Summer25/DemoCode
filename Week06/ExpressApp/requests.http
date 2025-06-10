@@ -1,0 +1,40 @@
+@hostname = http://localhost:3000
+
+get http://www.something.com
+
+###
+
+get {{hostname}}
+
+
+###
+
+get {{hostname}}/data
+
+###
+
+get {{hostname}}/northeastern
+
+###
+
+get {{hostname}}/dl
+
+###
+
+post {{hostname}}/newItem
+Content-type: application/json
+
+{
+    "first_name": "Newly",
+    "last_name": "Addeperson",
+    "email": "newpers@blah.test"
+}
+
+###
+
+delete {{hostname}}/data/51
+
+
+###
+
+get {{hostname}}/chain
