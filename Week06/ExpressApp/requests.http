@@ -38,3 +38,16 @@ delete {{hostname}}/data/51
 ###
 
 get {{hostname}}/chain
+
+
+###
+
+post {{hostname}}/chain
+
+###
+
+put {{hostname}}/chain
+
+###
+
+delete {{hostname}}/chain
