@@ -17,6 +17,7 @@ class Publisher {
     const context = thisObj || global;
     this.#handlers.forEach(function(item) {
       item.call(context, o);
+      // item(o);
     })
   }
 }
