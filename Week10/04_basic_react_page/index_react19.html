@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <title>My Simple React 19 App (No JSX)</title>
+    <script type="module">
+    import React from "https://esm.sh/react@19.0.0-beta-04b058868c-20240508/?dev"
+    import ReactDOMClient from "https://esm.sh/react-dom@19.0.0-beta-04b058868c-20240508/client/?dev"
+
+
+    window.onload = () => {
+        const rootElement = ReactDOMClient.createRoot(document.getElementById('root'));
+        rootElement.render(
+            React.createElement("div",
+            null,
+                React.createElement(Welcome,{ name: 'Friends' }),
+                React.createElement(LikeButton, {})
+            )
+        );
+    };
+    </script>
+</head>
+    <body>
+        My Simple React 19 App
+        <div id="root"></div>
+    </body>
+</html>
