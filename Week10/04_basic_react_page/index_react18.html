@@ -14,8 +14,46 @@
          <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
          <!-- React code (JS) -->
-          <script>
+        <script>
+            'use strict';
 
-          </script>
+            /* a functional component */
+            function Welcome(props) {
+                return React.createElement('h1', null, `Weclome ${props.name}!`);
+            }
+
+            /* a class component can hold state */
+            class LikeButton extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = { liked: false };
+                }
+
+                render() {
+                    if (this.state.liked) {
+                        return "You liked this.";
+                    }
+
+                    return React.createElement(
+                        'button',
+                        { onClick: () => this.setState( { liked: true })},
+                        'Like'
+                    );
+                }
+            }
+
+            const welcomeContainer = document.querySelector('#welcome');
+            ReactDOM.render(
+                React.createElement(
+                    Welcome,
+                    { name: 'Friends' }),
+                    welcomeContainer);
+
+            const buttonContainer = document.querySelector('#like_button_container');
+            ReactDOM.render(
+                React.createElement(
+                    LikeButton),
+                    buttonContainer);
+        </script>
     </body>
 </html>
