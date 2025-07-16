@@ -10,16 +10,158 @@
 
 <script>
 // Vanilla JS (ES 6+)
+let list = ['red', 'yellow', 'green', 'blue'];
 
+console.log(
+    list.map(
+        (w, i) => i + " " + w + " is a color"
+    )
+)
+
+let numlist = [1, 2, 3, 4, 5];
+
+console.log (
+    numlist.filter( x => x > 2 )
+)
+
+let l1 = ['a', 'b', 'c'];
+let l2 = ['d', 'e', 'f'];
+let l3 = ['g', 'h', 'i'];
+let threelists = [l1, l2, l3];
+
+console.log(threelists);
+
+console.log(
+    threelists.reduce( (acc, list) => acc.concat(list) )
+)
+
+console.log(
+    threelists.reduce( (acc, list) => acc.concat(list), ['starts', 'with'] )
+)
+
+console.log(
+    numlist.reduce( (acc, n) => acc + n )
+)
+
+console.log(
+    numlist.reduce( (acc, n) => acc + n, 10 )
+)
 
 // Lodash
 
+console.log(
+    _.union(list, numlist)
+)
+
+console.log(
+    _.take(list, 3)
+)
+
+console.log(
+    _.zip(list, numlist)
+)
+
+console.log(
+    _.take(
+        _.zip(list, numlist),
+        3
+    )
+)
 
 // Array-like objects
+let alo = {
+    0: 'milk',
+    1: 'cookies',
+    2: 'juice',
+    3: 'eggs',
+    4: 'yogurt',
+    length: 5
+}
 
+console.log(alo);
+console.log(alo[4]);
+
+// alo.forEach ( i => { console.log(i) } );
+
+Array.prototype.forEach.call(
+    alo,
+    ( val, i ) => { console.log( i + " " + val) }
+);
+
+[].forEach.call(
+    alo,
+    ( val, i ) => { console.log( i + " " + val) }
+);
+
+function printOutArgs(param) {
+    console.log(param);
+    console.log(arguments);
+    [].forEach.call(
+        arguments,
+        a => console.log(a)
+    )
+}
+
+printOutArgs('buick', 'toyota', 'hyundai', 'maserati');
+
+let arr = [].slice.call(alo);
+console.log(alo);
+console.log(arr);
+
+console.log(
+    _.take(alo, 3)
+)
 
 // RXJS
+let o$ = Rx.Observable.from(['a', 'b', 'c', 'd', 'e']);
+let t$ = o$.take(3);
 
+t$.subscribe(
+    i => {
+    console.log(`First 3: ${i}`)
+    }
+)
+
+o$.subscribe(
+    i => {
+        console.log(`Observable item: ${i}`)
+    }
+)
+
+let timer$ = Rx.Observable.timer(1000, 1000);
+// timer$.take(5).subscribe(i => {
+//     console.log(`Running timer: ${i}`)
+// })
+
+let sub$ = new Rx.Subject();
+
+sub$.subscribe(i => {
+    console.log(`The subject: ${i}`)
+})
+
+sub$.onNext('First item from the subject');
+
+function myClick() {
+    sub$.onNext('Click event!');
+}
+
+let ev$ = Rx.Observable.from(['Event 1', 'Event 2', 'Event 3', 'Event 4']);
+
+// let z$ = Rx.Observable.zip(
+//     ev$,
+//     timer$.take(4),
+//     (a, b) => a + " :: " + b
+// ).subscribe(i => {
+//     console.log(i);
+// })
+
+let z$ = Rx.Observable.zip(
+    ev$,
+    sub$,
+    (a, b) => a + " =:= " + b
+).subscribe(i => {
+    console.log(i);
+});
 
 </script>
 </html>
