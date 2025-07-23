@@ -12,7 +12,7 @@ export default function CardView( { card, app }) {
             }>
                 <img
                 src={`/png/1x/${card.rank}_${card.suit}.png`}
-                alt=""/>
+                alt={!card.flip ? `${readRank} of ${card.suit}` : ""}/>
             </div>
 
             <div onClick={
@@ -23,7 +23,7 @@ export default function CardView( { card, app }) {
             }>
                 <img
                 src={`/png/1x/back-blue.png`}
-                alt=""/>
+                alt={card.flip ? "card back" : ""}/>
             </div>
 
         </ReactCardFlip>

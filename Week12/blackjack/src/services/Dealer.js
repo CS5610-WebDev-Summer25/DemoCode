@@ -9,19 +9,49 @@ export default class Dealer {
   }
 
   freshDeck() {
+    this.distribution$ = new Subject(); // strings: 'p' or 'd'
+    this.trigger$ = new Subject(); // booleans
 
+    this.deck = this.shuffle(
+      suits.map(s =>
+        ranks.map(r =>
+          new Card(s, r)
+        )
+      ).reduce((acc, list) =>
+        acc.concat(list)
+      )
+    );
+
+    this.deck[1].flip = true;
+
+    this.deal$ = concat(
+      this.trigger$,
+      zip(
+        timer(1000, 1000),
+        zip(
+          this.distribution$,
+          from(this.deck)
+        )
+      )
+    )
   }
 
   deal() {
+    this.trigger$.next(true);
+    this.trigger$.complete();
 
+    this.distribution$.next('p');
+    this.distribution$.next('d');
+    this.distribution$.next('p');
+    this.distribution$.next('d');
   }
 
   hit() {
-
+    this.distribution$.next('p');
   }
 
   dealToDealer() {
-
+    this.distribution$.next('d');
   }
 
   shuffle(array) {

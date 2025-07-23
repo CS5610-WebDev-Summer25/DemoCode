@@ -191,7 +191,40 @@ export default class GameController {
   }
 
   setUpSubscription() {
+    this.dealer.deal$.subscribe(c => {
+      // Every time an item is received from deal$
+      // make sure that it's a card not a trigger
+      if (Array.isArray(c)) {
+        let card = c[1][1];
+        let receiver = c[1][0];
+        if (receiver === 'd') {
+          this._dealerCards.push(card);
+          if (card.value === 1) { this.dealerHasAce = true }
+          this.dealerScore += card.value;
+          if (this.dealerShouldHit() ) {
+            setTimeout(() => {
+              this.dealer.dealToDealer();
+            }, MESSAGE_WAIT);
+          } else if (this.playerStays) {
+            this.dealerStays = true;
+            this.calculateGameState();
+          }
+        } else if (receiver === 'p') {
+          this._playerCards.push(card);
+          if (card.value === 1) { this.playererHasAce = true }
+          this.playerScore += card.value;
+        }
 
+        if (this.blackjack()) {
+          this.gameState = 'Blackjack';
+        }
+        if (this.bust()) {
+          this.gameState = 'Bust';
+        }
+
+        this.calculateGameState();
+      }
+    });
   }
 
   playAgain(){

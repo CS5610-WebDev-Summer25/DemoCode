@@ -1,6 +1,7 @@
 import React from 'react'
 import Hand from './components/Hand';
 import ButtonPanel from './components/ButtonPanel';
+import PlayAgain from './components/PlayAgain';
 
 import GameController from './services/GameController';
 
@@ -25,18 +26,23 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1>
+          <h1 tabIndex={1}>
             Blackjack!
           </h1>
           <Hand
             dealer={true}
             cards={this.state.dealerCards}
+            tabindexbase={10}
           />
-          <ButtonPanel gc={this.gc}/>
+          <ButtonPanel gc={this.gc}
+            tabindexbase={20}/>
           <Hand
             dealer={false}
             cards={this.state.playerCards}
+            tabindexbase={30}
           />
+          <PlayAgain gc={this.gc}
+            tabindexbase={40}/>
         </header>
       </div>
     );

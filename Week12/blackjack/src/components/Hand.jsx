@@ -2,7 +2,7 @@ import CardView from './CardView';
 import '../style/Hand.css';
 
 
-export default function Hand({ dealer, cards }) {
+export default function Hand({ dealer, cards, tabindexbase }) {
   const handContent =
   cards.length === 0 ?
   <div className='hand'>
@@ -12,7 +12,8 @@ export default function Hand({ dealer, cards }) {
   </div>
   :
   cards.map((card, i) =>
-    <div className='hand' key={i}>
+    <div className='hand' key={i}
+      tabIndex={i+tabindexbase+1}>
       <CardView card={card}></CardView>
     </div>
   );
@@ -22,7 +23,9 @@ export default function Hand({ dealer, cards }) {
   }
 
   return (
-    <div className='hand-container'>
+    <div className='hand-container'
+      tabIndex={tabindexbase}
+      aria-label={ (dealer ? 'dealer' : 'player') + ' cards'}>
       { handContent }
     </div>
   )
