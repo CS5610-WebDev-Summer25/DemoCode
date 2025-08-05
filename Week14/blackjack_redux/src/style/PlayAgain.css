@@ -1,0 +1,15 @@
+button.playAgain {
+  width: 200px;
+}
+
+button.playAgain {
+  background-color: green;
+}
+
+button.playAgain:active {
+  background-color: darkgreen;
+}
+
+div.playAgainPlaceholder {
+  height: 44px;
+}
