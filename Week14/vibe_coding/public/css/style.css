@@ -1,0 +1,385 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.section {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Join Form Styles */
+.join-form {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.join-form h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+#join-game-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    width: 100%;
+}
+
+#join-game-btn:hover {
+    transform: translateY(-2px);
+}
+
+#join-status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.status-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Game Section Styles */
+#game-section {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    #game-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Chess Board Styles */
+.game-board-container {
+    display: flex;
+    justify-content: center;
+}
+
+.chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: 480px;
+    height: 480px;
+    border: 3px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.chess-square {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.chess-square.light {
+    background-color: #f0d9b5;
+}
+
+.chess-square.dark {
+    background-color: #b58863;
+}
+
+.chess-square.selected {
+    background-color: #ffff00 !important;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.chess-square.valid-move {
+    background-color: #90EE90 !important;
+}
+
+.chess-square.last-move {
+    background-color: #FFD700 !important;
+}
+
+.chess-square:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+}
+
+.chess-piece {
+    user-select: none;
+    pointer-events: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+/* Game Sidebar Styles */
+.game-sidebar {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.game-sidebar h3 {
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 5px;
+}
+
+.players-info, .move-history, .game-controls {
+    margin-bottom: 25px;
+}
+
+#players-list {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid #e9ecef;
+}
+
+.player-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.player-info:last-child {
+    border-bottom: none;
+}
+
+.player-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.player-color.white {
+    background: #fff;
+    border: 2px solid #333;
+}
+
+.player-color.black {
+    background: #333;
+}
+
+#moves-list {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid #e9ecef;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.move-item {
+    padding: 5px 0;
+    border-bottom: 1px solid #f1f3f4;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.move-item:last-child {
+    border-bottom: none;
+}
+
+.game-controls button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#new-game-btn {
+    background: #28a745;
+    color: white;
+}
+
+#new-game-btn:hover {
+    background: #218838;
+}
+
+#copy-room-id {
+    background: #17a2b8;
+    color: white;
+}
+
+#copy-room-id:hover {
+    background: #138496;
+}
+
+/* Messages */
+.messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.message {
+    background: #333;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    max-width: 300px;
+    animation: slideIn 0.3s ease;
+}
+
+.message.success {
+    background: #28a745;
+}
+
+.message.error {
+    background: #dc3545;
+}
+
+.message.info {
+    background: #17a2b8;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Turn indicator */
+.current-turn {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .chess-board {
+        width: 320px;
+        height: 320px;
+    }
+
+    .chess-square {
+        width: 40px;
+        height: 40px;
+        font-size: 28px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
